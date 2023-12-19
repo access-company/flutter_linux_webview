@@ -1,0 +1,125 @@
+# Copyright (c) 2023 ACCESS CO., LTD. All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are
+# met:
+#
+#     * Redistributions of source code must retain the above copyright
+# notice, this list of conditions and the following disclaimer.
+#     * Redistributions in binary form must reproduce the above
+# copyright notice, this list of conditions and the following disclaimer
+# in the documentation and/or other materials provided with the
+# distribution.
+#     * Neither the name of ACCESS CO., LTD. nor the names of its
+# contributors may be used to endorse or promote products derived from
+# this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+# A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+# HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+# LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+# DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+# THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+# (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+# This file is based on https://bitbucket.org/chromiumembedded/cef/src/4664/tests/cefsimple/CMakeLists.txt.in
+
+# Copyright (c) 2014 The Chromium Embedded Framework Authors. All rights
+# reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are
+# met:
+#
+#    * Redistributions of source code must retain the above copyright
+# notice, this list of conditions and the following disclaimer.
+#    * Redistributions in binary form must reproduce the above
+# copyright notice, this list of conditions and the following disclaimer
+# in the documentation and/or other materials provided with the
+# distribution.
+#    * Neither the name of Google Inc. nor the name Chromium Embedded
+# Framework nor the names of its contributors may be used to endorse
+# or promote products derived from this software without specific prior
+# written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+# A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+# OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+# LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+# DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+# THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+# (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+#
+# Source files.
+#
+
+# cefsimple sources.
+set(CEFSIMPLE_SRCS
+  flutter_webview_render_app.cc
+  flutter_webview_render_app.h
+  flutter_webview_process_messages.cc
+  flutter_webview_process_messages.h
+  )
+set(CEFSIMPLE_SRCS_LINUX
+  flutter_webview_subprocess.cc
+  )
+APPEND_PLATFORM_SOURCES(CEFSIMPLE_SRCS)
+source_group(cefsimple FILES ${CEFSIMPLE_SRCS})
+
+set(CEFSIMPLE_SRCS
+  ${CEFSIMPLE_SRCS}
+  )
+
+
+#
+# Shared configuration.
+#
+
+# Target executable names.
+set(CEF_TARGET "flutter_webview_subprocess")
+# Logical target used to link the libcef library.
+ADD_LOGICAL_TARGET("libcef_lib" "${CEF_LIB_DEBUG}" "${CEF_LIB_RELEASE}")
+
+# Determine the target output directory.
+SET_CEF_TARGET_OUT_DIR()
+
+
+#
+# Linux configuration.
+#
+
+if(OS_LINUX)
+  # Executable target.
+  add_executable(${CEF_TARGET} ${CEFSIMPLE_SRCS})
+  SET_EXECUTABLE_TARGET_PROPERTIES(${CEF_TARGET})
+  add_dependencies(${CEF_TARGET} libcef_dll_wrapper)
+  if("${WEBVIEW_DEBUG}")
+    target_link_libraries(${CEF_TARGET} libcef_lib libcef_dll_wrapper ${CEF_STANDARD_LIBS})
+  else()
+    target_link_libraries(${CEF_TARGET} ${CEF_LIB_RELEASE} libcef_dll_wrapper ${CEF_STANDARD_LIBS})
+  endif()
+
+  # Set rpath so that libraries can be placed next to the executable.
+  set_target_properties(${CEF_TARGET} PROPERTIES INSTALL_RPATH "$ORIGIN")
+  set_target_properties(${CEF_TARGET} PROPERTIES BUILD_WITH_INSTALL_RPATH TRUE)
+  set_target_properties(${CEF_TARGET} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CEF_TARGET_OUT_DIR})
+
+  # # Copy binary and resource files to the target output directory.
+  # COPY_FILES("${CEF_TARGET}" "${CEF_BINARY_FILES}" "${CEF_BINARY_DIR}" "${CEF_TARGET_OUT_DIR}")
+  # COPY_FILES("${CEF_TARGET}" "${CEF_RESOURCE_FILES}" "${CEF_RESOURCE_DIR}" "${CEF_TARGET_OUT_DIR}")
+  # if (EXISTS "${CEF_BINARY_DIR}/libminigbm.so")
+  #   COPY_FILES("${CEF_TARGET}" "libminigbm.so" "${CEF_BINARY_DIR}" "${CEF_TARGET_OUT_DIR}")
+  # endif()
+
+  # Set SUID permissions on the chrome-sandbox target.
+  SET_LINUX_SUID_PERMISSIONS("${CEF_TARGET}" "${CEF_TARGET_OUT_DIR}/chrome-sandbox")
+endif()

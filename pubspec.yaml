@@ -1,0 +1,60 @@
+name: flutter_linux_webview
+description: The Linux Desktop implementation of `webview_flutter` plugin (v3.0.4).
+version: 0.1.0
+repository: https://github.com/access-company/flutter_linux_webview
+
+environment:
+  sdk: ">=2.17.0 <4.0.0"
+  flutter: ">=3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  logging: ^1.1.0
+  path: ^1.8.1
+  webview_flutter_platform_interface: ^1.8.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^1.0.0
+
+  # note: Symbols defined in the webview_flutter package, such as the [WebView]
+  # and [WebViewController] and other classes, are not resolved
+  # (i.e., hyperlinked) when generating documentation for this plugin. To make
+  # them resolved, you need to temporarily add a dependency on the
+  # webview_flutter package here and import it in the files that have the
+  # references to be resolved.
+  #
+  # (Unfortunately, temporary reference resolution only during document
+  # generation does not seem to be possible.)
+  #
+  # webview_flutter: ^3.0.4
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter.
+flutter:
+  # This section identifies this Flutter project as a plugin project.
+  # The 'pluginClass' and Android 'package' identifiers should not ordinarily
+  # be modified. They are used by the tooling to maintain consistency when
+  # adding or updating assets for this project.
+  plugin:
+    implements: webview_flutter
+    platforms:
+      linux:
+        # This tells the SDK that this class is a plugin entry point for C++.
+        # Auto-generated build/linux/flutter/generated_plugin_registrant.cc will
+        # call `flutter_linux_webview_plugin_register_with_registrar()`.
+        pluginClass: FlutterLinuxWebviewPlugin
+
+        # TODO(Ino): Support auto registration of our platform implementation
+        # when upgrading to v4. This can be done with `dartPluginClass` field
+        # below. `dartPluginClass` filed tells the SDK that this class is a
+        # plugin entry point for Dart. The auto-generated
+        # .dart_tool/flutter_build/dart_plugin_registrant.dart
+        # will call `MyWebViewPlatform.registerWith()` so we can register our
+        # platform implementation at that time with
+        # webview_flutter_platform_interface.
+        ### dartPluginClass: MyWebViewPlatform

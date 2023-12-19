@@ -1,0 +1,33 @@
+--- a/CMakeLists.txt	2022-10-24 11:20:21.996309161 +0900
++++ b/CMakeLists.txt	2022-10-24 11:31:15.657591128 +0900
+@@ -132,8 +132,7 @@
+ # Global setup.
+ #
+ 
+-# For VS2019 and Xcode 12+ support.
+-cmake_minimum_required(VERSION 3.19)
++cmake_minimum_required(VERSION 3.10)
+ 
+ # Only generate Debug and Release configuration types.
+ set(CMAKE_CONFIGURATION_TYPES Debug Release)
+@@ -221,15 +225,15 @@
+ 
+ # Include application targets.
+ # Comes from the <target>/CMakeLists.txt file in the current directory.
+-# TODO: Change these lines to match your project target when you copy this file.
+ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/tests")
+-  add_subdirectory(tests/cefsimple)
+-  add_subdirectory(tests/gtest)
+-  add_subdirectory(tests/ceftests)
++  ### add_subdirectory(tests/cefsimple)
++  ### add_subdirectory(tests/gtest)
++  ### add_subdirectory(tests/ceftests)
++  add_subdirectory(tests/flutter_webview_subprocess)
+ endif()
+ 
+ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/tests/cefclient")
+-  add_subdirectory(tests/cefclient)
++  ### add_subdirectory(tests/cefclient)
+ endif()
+ 
+ # Display configuration settings.
