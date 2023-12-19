@@ -1,6 +1,6 @@
 # flutter\_linux\_webview
 
-The Linux Desktop implementation of the [webview_flutter](https://pub.dev/packages/webview_flutter/versions/3.0.4) (v3.0.4) plugin.
+A Linux Desktop implementation of the [webview_flutter](https://pub.dev/packages/webview_flutter/versions/3.0.4) (v3.0.4) plugin, powered by CEF (Chromium Embedded Framework).
 
 [webview_flutter](https://pub.dev/packages/webview_flutter/versions/3.0.4) is a [federated package](https://docs.flutter.dev/packages-and-plugins/developing-packages#federated-plugins), consisting of an app-facing package, platform interface package, and platform implementation packages.
 
@@ -10,11 +10,11 @@ Depending on the architecture, the following CEF binary distribution provided at
 - for x86_64: [cef_binary_96.0.18+gfe551e4+chromium-96.0.4664.110_linux64_minimal](https://cef-builds.spotifycdn.com/cef_binary_96.0.18%2Bgfe551e4%2Bchromium-96.0.4664.110_linux64_minimal.tar.bz2)
 - for arm64: [cef_binary_96.0.18+gfe551e4+chromium-96.0.4664.110_linuxarm64_minimal](https://cef-builds.spotifycdn.com/cef_binary_96.0.18%2Bgfe551e4%2Bchromium-96.0.4664.110_linuxarm64_minimal.tar.bz2)
 
-<!-- note: GitBucket does not seem to resolve relative paths; GitHub does. -->
+<!-- note: pub.dev and GitBucket does not resolve relative paths!! GitHub does. -->
 <table>
   <tr>
-    <td> <img src="doc_assets/main_webview.gif" alt="webview example main image" /> </td>
-    <td> <img src="doc_assets/multiple_webviews.gif" alt="multiple webviews example image" /> </td>
+    <td> <img src="https://github.com/access-company/flutter_linux_webview/blob/main/doc_assets/main_webview.gif?raw=true" alt="webview example main image" /> </td>
+    <td> <img src="https://github.com/access-company/flutter_linux_webview/blob/main/doc_assets/multiple_webviews.gif?raw=true" alt="multiple webviews example image" /> </td>
   </tr>
 </table>
 

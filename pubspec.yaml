@@ -1,6 +1,6 @@
 name: flutter_linux_webview
 description: The Linux Desktop implementation of `webview_flutter` plugin (v3.0.4).
-version: 0.1.0
+version: 0.1.1
 repository: https://github.com/access-company/flutter_linux_webview
 
 environment:
