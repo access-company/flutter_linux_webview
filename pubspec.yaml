@@ -1,6 +1,6 @@
 name: flutter_linux_webview
-description: The Linux Desktop implementation of `webview_flutter` plugin (v3.0.4).
-version: 0.1.1
+description: "A Linux Desktop implementation for the webview_flutter (v3.0.4) plugin, powered by CEF (Chromium Embedded Framework)"
+version: 0.1.2
 repository: https://github.com/access-company/flutter_linux_webview
 
 environment:

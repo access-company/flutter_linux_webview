@@ -1,3 +1,7 @@
+## 0.1.2
+
+* Minor improvements to the documentation.
+
 ## 0.1.1
 
 * Fix the broken GIF image links in README.md.

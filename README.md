@@ -1,10 +1,10 @@
 # flutter\_linux\_webview
 
-A Linux Desktop implementation of the [webview_flutter](https://pub.dev/packages/webview_flutter/versions/3.0.4) (v3.0.4) plugin, powered by CEF (Chromium Embedded Framework).
+A Linux Desktop implementation for the [webview_flutter](https://pub.dev/packages/webview_flutter/versions/3.0.4) (v3.0.4) plugin, powered by CEF (Chromium Embedded Framework).
 
 [webview_flutter](https://pub.dev/packages/webview_flutter/versions/3.0.4) is a [federated package](https://docs.flutter.dev/packages-and-plugins/developing-packages#federated-plugins), consisting of an app-facing package, platform interface package, and platform implementation packages.
 
-This plugin package provides the Linux implementation for [webview_flutter](https://pub.dev/packages/webview_flutter/versions/3.0.4) (v3.0.4) and is powered by CEF (Chromium Embedded Framework).
+This plugin package provides the Linux implementation for [webview_flutter](https://pub.dev/packages/webview_flutter/versions/3.0.4) (v3.0.4) using CEF.
 
 Depending on the architecture, the following CEF binary distribution provided at https://cef-builds.spotifycdn.com/index.html is downloaded in the source directory of the plugin at the first build time:
 - for x86_64: [cef_binary_96.0.18+gfe551e4+chromium-96.0.4664.110_linux64_minimal](https://cef-builds.spotifycdn.com/cef_binary_96.0.18%2Bgfe551e4%2Bchromium-96.0.4664.110_linux64_minimal.tar.bz2)
@@ -535,4 +535,6 @@ However, currently, we are not accepting contributions, and we are unable to res
 
 ## License
 
-The source code of flutter_linux_webview is licensed under the 3-Clause BSD License. Additionally, certain portions of the source code include third-party software, and they are licensed under their respective licenses. See [LICENSE](./LICENSE) for details.
+flutter_linux_webview is licensed under the 3-Clause BSD License, see [LICENSE](./LICENSE).
+
+Portions of flutter_linux_webview include third-party software, each of which is licensed under its respective license. See [ThirdPartyNotices.txt](./ThirdPartyNotices.txt) for details.
